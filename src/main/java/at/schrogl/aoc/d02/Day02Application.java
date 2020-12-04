@@ -10,15 +10,21 @@ import java.util.stream.Collectors;
 public class Day02Application {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        Day02Application day02Application = new Day02Application();
-
-        System.out.println("## Day 2: Password Philosophy");
         List<String> inputLines = getInputLines();
-        long validPasswords = inputLines.stream()
+
+        System.out.println("## DAY 02: Part I");
+        long validPasswords1 = inputLines.stream()
             .map(PasswordChecker::new)
-            .filter(PasswordChecker::isValid)
+            .filter(PasswordChecker::isValidForPart1)
             .count();
-        System.out.printf("Total passwords/Correct passwords: %d/%d", inputLines.size(), validPasswords);
+        System.out.printf("Total passwords/Correct passwords: %d/%d\n", inputLines.size(), validPasswords1);
+
+        System.out.println("\n## DAY 02: Part II");
+        long validPasswords2 = inputLines.stream()
+            .map(PasswordChecker::new)
+            .filter(PasswordChecker::isValidForPart2)
+            .count();
+        System.out.printf("Total passwords/Correct passwords: %d/%d\n", inputLines.size(), validPasswords2);
     }
 
     private static List<String> getInputLines() throws IOException, URISyntaxException {
@@ -41,11 +47,17 @@ public class Day02Application {
             this.upperBound = Integer.parseInt(validationChunk.substring(0, validationChunk.length() - 2).split("-")[1]);
         }
 
-        public boolean isValid() {
+        public boolean isValidForPart1() {
             long letterCount = password.chars()
                 .filter(c -> (c == letter))
                 .count();
             return letterCount >= lowerBound && letterCount <= upperBound;
+        }
+
+        public boolean isValidForPart2() {
+            char charAtPos1 = password.charAt(lowerBound - 1);
+            char charAtPos2 = password.charAt(upperBound - 1);
+            return Boolean.logicalXor(charAtPos1 == letter, charAtPos2 == letter);
         }
     }
 
