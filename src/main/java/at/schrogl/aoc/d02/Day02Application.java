@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Day02Application {
 
@@ -28,8 +29,9 @@ public class Day02Application {
     }
 
     private static List<String> getInputLines() throws IOException, URISyntaxException {
-        return Files.lines(Paths.get(Day02Application.class.getResource("input.txt").toURI()))
-            .collect(Collectors.toList());
+        try (Stream<String> inputLines = Files.lines(Paths.get(Day02Application.class.getResource("input.txt").toURI()))) {
+            return inputLines.collect(Collectors.toList());
+        }
     }
 
     private static class PasswordChecker {

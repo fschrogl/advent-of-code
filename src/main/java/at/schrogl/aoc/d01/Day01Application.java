@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Day01Application {
 
@@ -23,9 +24,11 @@ public class Day01Application {
     }
 
     private List<Integer> getInputLines() throws IOException, URISyntaxException {
-        return Files.lines(Paths.get(Day01Application.class.getResource("input.txt").toURI()))
-            .map(Integer::valueOf)
-            .collect(Collectors.toList());
+        try (Stream<String> inputLines = Files.lines(Paths.get(Day01Application.class.getResource("input.txt").toURI()))) {
+            return inputLines
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
+        }
     }
 
     private void solvePart1(List<Integer> inputList) {
