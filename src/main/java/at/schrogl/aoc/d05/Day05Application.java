@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -15,11 +16,26 @@ public class Day05Application {
 
         System.out.println("## DAY 05: Part I");
         System.out.printf("Total number of seats: %d\n", inputLines.size());
-        Long highestSeatId = inputLines.stream()
+        List<Long> allSeatIds = inputLines.stream()
             .mapToLong(Day05Application::calculateSeatId)
-            .max()
-            .getAsLong();
-        System.out.printf("Highest seat id: %d\n", highestSeatId);
+            .sorted()
+            .boxed()
+            .collect(Collectors.toList());
+        System.out.printf("Highest seat id: %d\n\n", allSeatIds.get(allSeatIds.size() - 1));
+
+        System.out.println("## DAY 05: Part II");
+        Iterator<Long> iterator = allSeatIds.iterator();
+        long mySeatId = 0;
+        long previousSeatId = iterator.next();
+        while (iterator.hasNext()) {
+            Long thisSeatId = iterator.next();
+            if ((previousSeatId + 1L) != thisSeatId) {
+                mySeatId = previousSeatId + 1L;
+                break;
+            }
+            previousSeatId = thisSeatId;
+        }
+        System.out.printf("My seat id: %d\n", mySeatId);
     }
 
     private static long calculateSeatId(String searchPattern) {
