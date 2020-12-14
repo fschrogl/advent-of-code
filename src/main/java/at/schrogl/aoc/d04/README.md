@@ -24,7 +24,7 @@ fields. The expected fields are as follows:
 * pid (Passport ID)
 * cid (Country ID)
 
-Passport data is validated in batch files (your puzzle input). Each passport is represented as a sequence of key:value
+Passport data is validated in batch files (your puzzle data). Each passport is represented as a sequence of key:value
 pairs separated by spaces or newlines. Passports are separated by blank lines.
 
 Here is an example batch file containing four passports:

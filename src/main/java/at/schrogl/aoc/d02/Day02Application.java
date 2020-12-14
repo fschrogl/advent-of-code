@@ -29,7 +29,7 @@ public class Day02Application {
     }
 
     private static List<String> getInputLines() throws IOException, URISyntaxException {
-        try (Stream<String> inputLines = Files.lines(Paths.get(Day02Application.class.getResource("input.txt").toURI()))) {
+        try (Stream<String> inputLines = Files.lines(Paths.get(Day02Application.class.getResource("input-exercise12.txt").toURI()))) {
             return inputLines.collect(Collectors.toList());
         }
     }

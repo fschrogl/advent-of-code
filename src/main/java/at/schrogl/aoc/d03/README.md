@@ -7,7 +7,7 @@ it's certainly not safe: there's very minimal steering and the area is covered i
 angles will take you near the fewest trees.
 
 Due to the local geology, trees in this area only grow on exact integer coordinates in a grid. You make a map (your
-puzzle input) of the open squares (.) and trees (#) you can see. For example:
+puzzle data) of the open squares (.) and trees (#) you can see. For example:
 
     ..##.......
     #...#...#..

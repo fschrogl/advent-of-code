@@ -6,7 +6,7 @@ You board your plane only to discover a new problem: you dropped your boarding p
 yours, and all of the flight attendants are busy with the flood of people that suddenly made it through passport
 control.
 
-You write a quick program to use your phone's camera to scan all of the nearby boarding passes (your puzzle input);
+You write a quick program to use your phone's camera to scan all of the nearby boarding passes (your puzzle data);
 perhaps you can find your seat through process of elimination.
 
 Instead of zones or groups, this airline uses binary space partitioning to seat people. A seat might be specified like

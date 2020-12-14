@@ -59,7 +59,7 @@ public class Day06Application {
     }
 
     private static List<String> getInputLines() throws IOException, URISyntaxException {
-        try (Stream<String> inputLines = Files.lines(Paths.get(Day06Application.class.getResource("input.txt").toURI()))) {
+        try (Stream<String> inputLines = Files.lines(Paths.get(Day06Application.class.getResource("input-exercise12.txt").toURI()))) {
             return inputLines.collect(Collectors.toList());
         }
     }
