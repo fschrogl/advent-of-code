@@ -3,6 +3,7 @@ package at.schrogl.aoc;
 import at.schrogl.aoc.common.AbstractSolution;
 import at.schrogl.aoc.common.DayInfo;
 import at.schrogl.aoc.d01.Day01;
+import at.schrogl.aoc.d02.Day02;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.Map;
 public class AdventOfCodeApplication {
 
     private final Class<? extends AbstractSolution>[] solutionClasses = new Class[]{
-        Day01.class
+        Day01.class, Day02.class
     };
     private final Map<Integer, AbstractSolution> solutions = new HashMap<>(solutionClasses.length);
 
@@ -21,7 +22,7 @@ public class AdventOfCodeApplication {
         adventOfCodeApplication.initAndPrintToc();
 
         int solutionToExecute = -1;
-        if (args == null) {
+        if (args.length == 0) {
             System.out.print("Select day to execute: ");
             solutionToExecute = System.in.read() - 48;
         } else {
