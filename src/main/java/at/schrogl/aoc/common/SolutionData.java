@@ -22,7 +22,7 @@ package at.schrogl.aoc.common;
  * #L%
  */
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -111,6 +111,15 @@ public class SolutionData {
                 return Collections.unmodifiableList(Files.readAllLines(Path.of(resource.getPath())));
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
+            }
+        }
+
+        public InputStream asInputStream() {
+            try {
+                File dataFile = new File(resource.getFile());
+                return new BufferedInputStream(new FileInputStream(dataFile), (int) dataFile.length());
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
             }
         }
     }
