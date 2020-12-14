@@ -21,9 +21,8 @@ public class Day01 extends AbstractSolution {
 
         List<String> input = data.getInput().asLines();
         List<Long> numbers = get2NumberResult(input);
-        Long actualResult = numbers.stream().reduce(Math::multiplyExact).orElse(null);
-        data.setActualResult(actualResult);
-        data.setActualResultDetails(() -> String.format("%d * %d = %d", numbers.get(0), numbers.get(1), actualResult));
+        data.setActualResult(numbers.stream().reduce(Math::multiplyExact).orElse(null));
+        data.setActualResultDetails(() -> String.format("%d * %d = %d", numbers.get(0), numbers.get(1), data.getActualResult()));
 
         return data;
     }
@@ -35,6 +34,7 @@ public class Day01 extends AbstractSolution {
         List<String> input = data.getInput().asLines();
         List<Long> numbers = get3NumberResult(input);
         data.setActualResult(numbers.stream().reduce(Math::multiplyExact).orElse(null));
+        data.setActualResultDetails(() -> String.format("%d * %d * %d = %d", numbers.get(0), numbers.get(1), numbers.get(2), data.getActualResult()));
 
         return data;
     }
@@ -46,6 +46,7 @@ public class Day01 extends AbstractSolution {
         List<String> input = data.getInput().asLines();
         List<Long> numbers = get2NumberResult(input);
         data.setActualResult(numbers.stream().reduce(Math::multiplyExact).orElse(null));
+        data.setActualResultDetails(() -> String.format("%d * %d = %d", numbers.get(0), numbers.get(1), data.getActualResult()));
 
         return data;
     }
@@ -57,6 +58,7 @@ public class Day01 extends AbstractSolution {
         List<String> input = data.getInput().asLines();
         List<Long> numbers = get3NumberResult(input);
         data.setActualResult(numbers.stream().reduce(Math::multiplyExact).orElse(null));
+        data.setActualResultDetails(() -> String.format("%d * %d * %d = %d", numbers.get(0), numbers.get(1), numbers.get(2), data.getActualResult()));
 
         return data;
     }
