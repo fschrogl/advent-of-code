@@ -26,6 +26,7 @@ import at.schrogl.aoc.common.AbstractSolution;
 import at.schrogl.aoc.common.DayInfo;
 import at.schrogl.aoc.d01.Day01;
 import at.schrogl.aoc.d02.Day02;
+import at.schrogl.aoc.d03.Day03;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +34,7 @@ import java.util.Map;
 public class AdventOfCodeApplication {
 
     private final Class<?>[] solutionClasses = new Class[]{
-        Day01.class, Day02.class
+        Day01.class, Day02.class, Day03.class
     };
     private final Map<Integer, AbstractSolution> solutions = new HashMap<>(solutionClasses.length);
 
