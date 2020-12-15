@@ -46,15 +46,19 @@ public abstract class AbstractSolution {
     }
 
     private void printSolution(String prefix, SolutionData solutionData) {
-        Duration computationDuration = solutionData.getComputationDuration();
-        System.out.printf(
-            "%s:  %s (%.2fms)\n", prefix, solutionData.getSolutionStatus(),
-            (computationDuration == null) ? -1 : computationDuration.toNanos() / 1_000_000f
-        );
-        System.out.printf("\tinput:    %s\n", solutionData.getInput().getFilename());
-        System.out.printf("\tactual:   %d\n", solutionData.getActualResult());
-        System.out.printf("\texpected: %d\n", solutionData.getExpectedResult());
-        System.out.printf("\tDetails:  %s\n", solutionData.getActualResultDetails());
+        if (solutionData == null) {
+            System.out.printf("%s:  Not implemented!\n", prefix);
+        } else {
+            Duration computationDuration = solutionData.getComputationDuration();
+            System.out.printf(
+                "%s:  %s (%.2fms)\n", prefix, solutionData.getSolutionStatus(),
+                (computationDuration == null) ? -1 : computationDuration.toNanos() / 1_000_000f
+            );
+            System.out.printf("\tinput:    %s\n", solutionData.getInput().getFilename());
+            System.out.printf("\tactual:   %d\n", solutionData.getActualResult());
+            System.out.printf("\texpected: %d\n", solutionData.getExpectedResult());
+            System.out.printf("\tDetails:  %s\n", solutionData.getActualResultDetails());
+        }
     }
 
 }
