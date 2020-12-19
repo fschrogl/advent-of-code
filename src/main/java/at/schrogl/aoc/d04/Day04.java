@@ -26,10 +26,6 @@ import at.schrogl.aoc.common.AbstractSolution;
 import at.schrogl.aoc.common.DayInfo;
 import at.schrogl.aoc.common.SolutionData;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -44,7 +40,7 @@ public class Day04 extends AbstractSolution {
     protected SolutionData example1() {
         SolutionData data = SolutionData.from(Day04.class.getResource("input-example12.txt"), 2L);
 
-        HashMap<Integer, String> passportLines = parsePassportLines(data.getInput().asInputStream());
+        Map<Integer, String> passportLines = data.getInput().asJoinedGroupLines();
         List<Passport> validPassports = passportLines.entrySet().stream()
             .map(e -> new Passport(e.getKey(), e.getValue()))
             .filter(Passport::isValidPart1)
@@ -63,7 +59,7 @@ public class Day04 extends AbstractSolution {
     protected SolutionData exercise1() {
         SolutionData data = SolutionData.from(Day04.class.getResource("input-exercise12.txt"), 233L);
 
-        HashMap<Integer, String> passportLines = parsePassportLines(data.getInput().asInputStream());
+        Map<Integer, String> passportLines = data.getInput().asJoinedGroupLines();
         List<Passport> validPassports = passportLines.entrySet().parallelStream()
             .map(e -> new Passport(e.getKey(), e.getValue()))
             .filter(Passport::isValidPart1)
@@ -82,7 +78,7 @@ public class Day04 extends AbstractSolution {
     protected SolutionData example2() {
         SolutionData data = SolutionData.from(Day04.class.getResource("input-example12.txt"), 2L);
 
-        HashMap<Integer, String> passportLines = parsePassportLines(data.getInput().asInputStream());
+        Map<Integer, String> passportLines = data.getInput().asJoinedGroupLines();
         List<Passport> validPassports = passportLines.entrySet().stream()
             .map(e -> new Passport(e.getKey(), e.getValue()))
             .filter(Passport::isValidPart2)
@@ -101,7 +97,7 @@ public class Day04 extends AbstractSolution {
     protected SolutionData exercise2() {
         SolutionData data = SolutionData.from(Day04.class.getResource("input-exercise12.txt"), 111L);
 
-        HashMap<Integer, String> passportLines = parsePassportLines(data.getInput().asInputStream());
+        Map<Integer, String> passportLines = data.getInput().asJoinedGroupLines();
         List<Passport> validPassports = passportLines.entrySet().parallelStream()
             .map(e -> new Passport(e.getKey(), e.getValue()))
             .filter(Passport::isValidPart2)
@@ -114,29 +110,6 @@ public class Day04 extends AbstractSolution {
         );
 
         return data;
-    }
-
-    private HashMap<Integer, String> parsePassportLines(final InputStream dataStream) {
-        try (LineNumberReader fileReader = new LineNumberReader(new InputStreamReader(dataStream))) {
-            HashMap<Integer, String> passportLines = new HashMap<>();
-            Integer passportLineNumber = null;
-            StringBuilder tmpLine = new StringBuilder();
-            String line = null;
-            while ((line = fileReader.readLine()) != null) {
-                if (line.isBlank() && tmpLine.length() > 0) {
-                    passportLines.put(passportLineNumber, tmpLine.toString().trim());
-                    tmpLine = new StringBuilder();
-                    passportLineNumber = null;
-                } else {
-                    passportLineNumber = fileReader.getLineNumber();
-                    ;
-                    tmpLine.append(line.trim()).append(" ");
-                }
-            }
-            return passportLines;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private static class Passport {

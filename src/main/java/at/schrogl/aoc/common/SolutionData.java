@@ -28,9 +28,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class SolutionData {
@@ -40,7 +38,7 @@ public class SolutionData {
     private Duration computationDuration;
     private Long expectedResult;
     private Long actualResult;
-    private String actualResultDetails;
+    private Supplier<String> actualResultDetails;
 
     private SolutionData(URL resource) {
         data = new Data(resource);
@@ -67,7 +65,7 @@ public class SolutionData {
     }
 
     public void setActualResultDetails(Supplier<String> details) {
-        this.actualResultDetails = details.get();
+        this.actualResultDetails = details;
     }
 
     public Long getActualResult() {
@@ -75,7 +73,11 @@ public class SolutionData {
     }
 
     public String getActualResultDetails() {
-        return (actualResultDetails == null || actualResultDetails.isBlank()) ? "None" : actualResultDetails;
+        if (actualResultDetails != null) {
+            String resultDetails = actualResultDetails.get();
+            return (resultDetails == null || resultDetails.isBlank()) ? "None" : resultDetails;
+        }
+        return "None";
     }
 
     public Duration getComputationDuration() {
@@ -111,6 +113,31 @@ public class SolutionData {
                 return Collections.unmodifiableList(Files.readAllLines(Path.of(resource.getPath())));
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
+            }
+        }
+
+        public Map<Integer, String> asJoinedGroupLines() {
+            try (LineNumberReader fileReader = new LineNumberReader(new InputStreamReader(asInputStream()))) {
+                Map<Integer, String> groupLines = new HashMap<>();
+                Integer lineNumber = null;
+                StringBuilder tmpLine = new StringBuilder();
+                String line = null;
+                while ((line = fileReader.readLine()) != null) {
+                    if (line.isBlank() && tmpLine.length() > 0) {
+                        groupLines.put(lineNumber, tmpLine.toString().trim());
+                        tmpLine = new StringBuilder();
+                        lineNumber = null;
+                    } else {
+                        lineNumber = fileReader.getLineNumber();
+                        tmpLine.append(line.trim()).append(" ");
+                    }
+                }
+                if (!tmpLine.toString().isBlank()) {
+                    groupLines.put(lineNumber, tmpLine.toString().trim());
+                }
+                return groupLines;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }
 
