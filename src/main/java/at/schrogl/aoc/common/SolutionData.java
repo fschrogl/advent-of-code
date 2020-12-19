@@ -28,7 +28,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class SolutionData {
@@ -110,7 +113,7 @@ public class SolutionData {
 
         public List<String> asLines() {
             try {
-                return Collections.unmodifiableList(Files.readAllLines(Path.of(resource.getPath())));
+                return Files.readAllLines(Path.of(resource.getPath()));
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
