@@ -72,6 +72,10 @@ public class Day10 extends AbstractSolution {
 
     @Override
     protected SolutionData example2() {
+        SolutionData data = SolutionData.from(getClass().getResource("input-example12.txt"), 19208L);
+
+        // TODO
+
         return null;
     }
 
