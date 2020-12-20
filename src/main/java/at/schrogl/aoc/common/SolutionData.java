@@ -120,7 +120,7 @@ public class SolutionData {
         }
 
         public Map<Integer, String> asJoinedGroupLines() {
-            try (LineNumberReader fileReader = new LineNumberReader(new InputStreamReader(asInputStream()))) {
+            try (LineNumberReader fileReader = asLineNumberReader()) {
                 Map<Integer, String> groupLines = new HashMap<>();
                 Integer lineNumber = null;
                 StringBuilder tmpLine = new StringBuilder();
@@ -144,14 +144,15 @@ public class SolutionData {
             }
         }
 
-        public InputStream asInputStream() {
+        public LineNumberReader asLineNumberReader() {
             try {
                 File dataFile = new File(resource.getFile());
-                return new BufferedInputStream(new FileInputStream(dataFile), (int) dataFile.length());
+                return new LineNumberReader(new InputStreamReader(new FileInputStream(dataFile)), (int) dataFile.length());
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
         }
+
     }
 
 }
