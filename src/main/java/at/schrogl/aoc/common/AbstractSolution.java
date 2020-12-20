@@ -30,9 +30,9 @@ public abstract class AbstractSolution {
 
     protected abstract SolutionData example1();
 
-    protected abstract SolutionData example2();
-
     protected abstract SolutionData exercise1();
+
+    protected abstract SolutionData example2();
 
     protected abstract SolutionData exercise2();
 
