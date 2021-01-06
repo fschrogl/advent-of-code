@@ -32,8 +32,11 @@ import at.schrogl.aoc.d05.Day05;
 import at.schrogl.aoc.d06.Day06;
 import at.schrogl.aoc.d08.Day08;
 import at.schrogl.aoc.d09.Day09;
+import at.schrogl.aoc.d11.Day11;
 import at.schrogl.aoc.d12.Day12;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,7 +44,7 @@ public class AdventOfCodeApplication {
 
     private final Class<?>[] solutionClasses = new Class[]{
         Day01.class, Day02.class, Day03.class, Day04.class, Day05.class, Day06.class, Day08.class, Day09.class,
-        Day12.class
+        Day11.class, Day12.class
     };
     private final Map<Integer, AbstractSolution> solutions = new HashMap<>(solutionClasses.length);
 
@@ -54,7 +57,8 @@ public class AdventOfCodeApplication {
         int solutionToExecute;
         if (args.length == 0) {
             System.out.print("Select day to execute: ");
-            solutionToExecute = System.in.read() - 48;
+            String input = new BufferedReader(new InputStreamReader(System.in)).readLine();
+            solutionToExecute = Integer.parseInt(input);
         } else {
             solutionToExecute = Integer.parseInt(args[0]);
         }
