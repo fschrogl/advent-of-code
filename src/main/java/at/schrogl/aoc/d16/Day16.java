@@ -16,47 +16,15 @@ public class Day16 extends AbstractSolution {
 
     @Override
     protected SolutionData example1() {
-        SolutionData data = SolutionData.from(Day16.class.getResource("input-example12.txt"), 71L);
-
-        List<Long> nearbyTicketNumbers = new ArrayList<>();
-        List<Range> validRanges = new ArrayList<>();
-
-        int inputSection = 0;
-        for (String line : data.getInput().asLines()) {
-            if (line.isBlank()) {
-                inputSection++;
-                continue;
-            }
-            if (line.startsWith("your ticket:") || line.startsWith("nearby tickets:")) continue;
-
-            switch (inputSection) {
-                case 0: // Rules
-                    for (String rangeValues : line.substring(line.indexOf(':') + 2).split(" or ")) {
-                        String[] rangeSplits = rangeValues.split("-");
-                        validRanges.add(new Range(Long.parseLong(rangeSplits[0]), Long.parseLong(rangeSplits[1])));
-                    }
-                    break;
-                case 2: // Nearby tickets
-                    for (String value : line.split(",")) {
-                        nearbyTicketNumbers.add(Long.parseLong(value));
-                    }
-                    break;
-            }
-        }
-
-        List<Long> ticketScanningErrorVales = nearbyTicketNumbers.stream()
-            .filter(aLong -> validRanges.stream().noneMatch(range -> range.isValid(aLong)))
-            .collect(Collectors.toList());
-        data.setActualResult(ticketScanningErrorVales.stream().mapToLong(Long::longValue).sum());
-        data.setActualResultDetails(ticketScanningErrorVales::toString);
-
-        return data;
+        return solvePart1(SolutionData.from(Day16.class.getResource("input-example12.txt"), 71L));
     }
 
     @Override
     protected SolutionData exercise1() {
-        SolutionData data = SolutionData.from(Day16.class.getResource("input-exercise12.txt"), 23925L);
+        return solvePart1(SolutionData.from(Day16.class.getResource("input-exercise12.txt"), 23925L));
+    }
 
+    private SolutionData solvePart1(SolutionData data) {
         List<Long> nearbyTicketNumbers = new ArrayList<>();
         List<Range> validRanges = new ArrayList<>();
 
