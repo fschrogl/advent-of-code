@@ -19,7 +19,7 @@ letter indicates which half of that region the seat is in, and so on until you'r
 
 For example, consider just the first seven characters of FBFBBFFRLR:
 
-* Start by considering the whole range, rows 0 through 127.
+* Start by considering the whole fieldDefinition, rows 0 through 127.
 * F means to take the lower half, keeping rows 0 through 63.
 * B means to take the upper half, keeping rows 32 through 63.
 * F means to take the lower half, keeping rows 32 through 47.
@@ -34,7 +34,7 @@ lower half, while R means to keep the upper half.
 
 For example, consider just the last 3 characters of FBFBBFFRLR:
 
-* Start by considering the whole range, columns 0 through 7.
+* Start by considering the whole fieldDefinition, columns 0 through 7.
 * R means to take the upper half, keeping columns 4 through 7.
 * L means to take the lower half, keeping columns 4 through 5.
 * The final R keeps the upper of the two, column 5.
