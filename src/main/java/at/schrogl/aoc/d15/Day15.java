@@ -12,7 +12,26 @@ public class Day15 extends AbstractSolution {
 
     @Override
     protected SolutionData example1() {
-        return null;
+        SolutionData data = SolutionData.from(Day15.class.getResource("input-example1.txt"), 2390L);
+
+        long result = 0L;
+        StringBuilder detailResult = new StringBuilder();
+        for (String line : data.getInput().asLines()) {
+            String formula = line.substring(0, line.indexOf("=")).trim();
+            long expectedResult = Long.parseLong(line.substring(line.lastIndexOf("=") + 1).trim());
+            long actualResult = Day15Part1Solver.solve(formula);
+            if (expectedResult == actualResult) {
+                result += actualResult;
+                detailResult.append(actualResult).append(", ");
+            } else {
+                throw new RuntimeException(String.format("Formula %s evaluated to %d", line, actualResult));
+            }
+        }
+
+        data.setActualResult(result);
+        data.setActualResultDetails(detailResult::toString);
+
+        return data;
     }
 
     @Override
