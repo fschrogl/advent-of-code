@@ -12,7 +12,7 @@ public class Day15 extends AbstractSolution {
 
     @Override
     protected SolutionData example1() {
-        SolutionData data = SolutionData.from(Day15.class.getResource("input-example1.txt"), 2390L);
+        SolutionData data = SolutionData.from(Day15.class.getResource("input-example1.txt"), 2826L);
 
         long result = 0L;
         StringBuilder detailResult = new StringBuilder();
@@ -36,7 +36,11 @@ public class Day15 extends AbstractSolution {
 
     @Override
     protected SolutionData example2() {
-        return null;
+        SolutionData data = SolutionData.from(Day15.class.getResource("input-exercise12.txt"), 1085L);
+        long result = Day15Part1Solver.solve(data.getInput().asLines().get(0));
+        data.setActualResult(result);
+
+        return data;
     }
 
     @Override

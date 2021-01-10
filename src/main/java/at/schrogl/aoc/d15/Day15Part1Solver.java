@@ -9,19 +9,22 @@ public class Day15Part1Solver {
         Map<Long, Integer> numberOccurrenceIndex = new HashMap<>();
         String[] startingNumbers = formula.split(",");
         Long lastNumberSpoken = null;
+        Long thisNumberSpoken = null;
 
-        for (int i = 0; i < startingNumbers.length; i++) {
+        for (int i = 0; i < startingNumbers.length - 1; i++) {
             lastNumberSpoken = Long.parseLong(startingNumbers[i]);
             numberOccurrenceIndex.put(lastNumberSpoken, i);
         }
+        lastNumberSpoken = Long.parseLong(startingNumbers[startingNumbers.length - 1]);
 
-        for (int i = startingNumbers.length; i < 10; ) {
+        for (int i = startingNumbers.length; i < 2020; ) {
             Integer indexLastNumberSpokenOccurrence = numberOccurrenceIndex.get(lastNumberSpoken);
-            lastNumberSpoken = (indexLastNumberSpokenOccurrence <= 2) ? 0L : (long) (i - indexLastNumberSpokenOccurrence);
-            numberOccurrenceIndex.put(lastNumberSpoken, i);
+            thisNumberSpoken = (indexLastNumberSpokenOccurrence == null) ? 0 : (long) i - 1 - indexLastNumberSpokenOccurrence;
+            numberOccurrenceIndex.put(lastNumberSpoken, i - 1);
+            lastNumberSpoken = thisNumberSpoken;
             i++;
         }
 
-        return lastNumberSpoken;
+        return thisNumberSpoken;
     }
 }
