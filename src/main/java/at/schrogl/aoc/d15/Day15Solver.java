@@ -3,9 +3,9 @@ package at.schrogl.aoc.d15;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Day15Part1Solver {
+public class Day15Solver {
 
-    public static long solve(String formula) {
+    public static long solve(String formula, long iterations) {
         Map<Long, Integer> numberOccurrenceIndex = new HashMap<>();
         String[] startingNumbers = formula.split(",");
         Long lastNumberSpoken = null;
@@ -17,7 +17,7 @@ public class Day15Part1Solver {
         }
         lastNumberSpoken = Long.parseLong(startingNumbers[startingNumbers.length - 1]);
 
-        for (int i = startingNumbers.length; i < 2020; ) {
+        for (int i = startingNumbers.length; i < iterations; ) {
             Integer indexLastNumberSpokenOccurrence = numberOccurrenceIndex.get(lastNumberSpoken);
             thisNumberSpoken = (indexLastNumberSpokenOccurrence == null) ? 0 : (long) i - 1 - indexLastNumberSpokenOccurrence;
             numberOccurrenceIndex.put(lastNumberSpoken, i - 1);

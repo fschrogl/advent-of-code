@@ -19,7 +19,7 @@ public class Day15 extends AbstractSolution {
         for (String line : data.getInput().asLines()) {
             String formula = line.substring(0, line.indexOf("=")).trim();
             long expectedResult = Long.parseLong(line.substring(line.lastIndexOf("=") + 1).trim());
-            long actualResult = Day15Part1Solver.solve(formula);
+            long actualResult = Day15Solver.solve(formula, 2020);
             if (expectedResult == actualResult) {
                 result += actualResult;
                 detailResult.append(actualResult).append(", ");
@@ -35,22 +35,45 @@ public class Day15 extends AbstractSolution {
     }
 
     @Override
-    protected SolutionData example2() {
+    protected SolutionData exercise1() {
         SolutionData data = SolutionData.from(Day15.class.getResource("input-exercise12.txt"), 1085L);
-        long result = Day15Part1Solver.solve(data.getInput().asLines().get(0));
+        long result = Day15Solver.solve(data.getInput().asLines().get(0), 2020);
         data.setActualResult(result);
 
         return data;
     }
 
     @Override
-    protected SolutionData exercise1() {
-        return null;
+    protected SolutionData example2() {
+        SolutionData data = SolutionData.from(Day15.class.getResource("input-example2.txt"), 10879167L);
+
+        long result = 0L;
+        StringBuilder detailResult = new StringBuilder();
+        for (String line : data.getInput().asLines()) {
+            String formula = line.substring(0, line.indexOf("=")).trim();
+            long expectedResult = Long.parseLong(line.substring(line.lastIndexOf("=") + 1).trim());
+            long actualResult = Day15Solver.solve(formula, 30000000);
+            if (expectedResult == actualResult) {
+                result += actualResult;
+                detailResult.append(actualResult).append(", ");
+            } else {
+                throw new RuntimeException(String.format("Formula %s evaluated to %d", line, actualResult));
+            }
+        }
+
+        data.setActualResult(result);
+        data.setActualResultDetails(detailResult::toString);
+
+        return data;
     }
 
     @Override
     protected SolutionData exercise2() {
-        return null;
+        SolutionData data = SolutionData.from(Day15.class.getResource("input-exercise12.txt"), 10652L);
+        long result = Day15Solver.solve(data.getInput().asLines().get(0), 30000000);
+        data.setActualResult(result);
+
+        return data;
     }
 
     public static void main(String[] args) {
