@@ -3,7 +3,6 @@ package at.schrogl.aoc.d21;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -27,31 +26,29 @@ public class Day21Part1Solver {
                 .stream(line.substring(0, idxAllergenStart).trim().split(" "))
                 .map(this::mapToIngredient)
                 .collect(Collectors.toSet());
-            Set<Allergen> allergenes = Arrays
+            Arrays
                 .stream(line.substring(idxAllergenStart, line.length() - 1).split(", "))
                 .map(this::mapToAllergen)
-                .collect(Collectors.toSet());
-
-            allergenes.forEach(a -> a.computePossibleIngredients(ingredients));
-
+                .forEach(a -> a.computePossibleIngredients(ingredients));
         }
+
+
     }
 
     private Ingredient mapToIngredient(final String ingredientName) {
-        String trimmedIngredientName = ingredientName.trim();
-        Ingredient ingredient = allIngredients.merge(trimmedIngredientName, new Ingredient(trimmedIngredientName), (oldValue, newValue) -> oldValue);
-        ingredient.incrementAppearance();
-        return ingredient;
+        return allIngredients.compute(ingredientName.trim(), (key, value) -> {
+            Ingredient ingredient = (value == null) ? new Ingredient(key) : value;
+            ingredient.incrementAppearance();
+            return ingredient;
+        });
     }
 
     private Allergen mapToAllergen(final String allergenName) {
-        String trimmedAllergenName = allergenName.trim();
-        return allAllergenes.merge(trimmedAllergenName, new Allergen(trimmedAllergenName), (oldValue, newValue) -> oldValue);
+        return allAllergenes.compute(allergenName.trim(), (key, value) -> (value == null) ? new Allergen(key) : value);
     }
 
     private static class Allergen {
-        Ingredient ingredient;
-        Set<Ingredient> possibleIngredients = new HashSet<>();
+        Map<Ingredient, Integer> possibleIngredients = new HashMap<>();
 
         final String name;
 
@@ -60,11 +57,7 @@ public class Day21Part1Solver {
         }
 
         void computePossibleIngredients(Collection<Ingredient> ingredients) {
-            if (possibleIngredients.isEmpty()) {
-                possibleIngredients.addAll(ingredients);
-            } else {
-
-            }
+            ingredients.forEach(i -> possibleIngredients.compute(i, (key, value) -> (value == null) ? 1 : value++));
         }
 
         @Override
