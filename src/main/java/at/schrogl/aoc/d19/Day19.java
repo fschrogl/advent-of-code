@@ -26,7 +26,16 @@ public class Day19 extends AbstractSolution {
 
     @Override
     protected SolutionData exercise1() {
-        return null;
+        SolutionData data = SolutionData.from(Day19.class.getResource("input-exercise12.txt"), null);
+
+        Day19Part1Solver day19Part1Solver = new Day19Part1Solver();
+        day19Part1Solver.parse(data.getInput().asLines());
+
+        data.setActualResult(day19Part1Solver.countDataLinesMatchingRuleZero());
+        data.setActualResultDetails(
+            () -> String.format("Matching line numbers: %s", day19Part1Solver.getLineNumbersMatchingRuleZero())
+        );
+        return data;
     }
 
     @Override
