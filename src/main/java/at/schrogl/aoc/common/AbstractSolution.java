@@ -61,4 +61,9 @@ public abstract class AbstractSolution {
         }
     }
 
+    @Override
+    public String toString() {
+        DayInfo dayInfo = getDayInfo();
+        return String.format("Day %3d: %s", dayInfo.getDayOfAdvent(), dayInfo.getTitle());
+    }
 }

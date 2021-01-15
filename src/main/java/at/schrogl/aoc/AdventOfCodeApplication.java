@@ -44,7 +44,7 @@ import java.util.Map;
 
 public class AdventOfCodeApplication {
 
-    private final Class<?>[] solutionClasses = new Class[]{
+    public static final Class<?>[] solutionClasses = new Class[]{
         Day01.class, Day02.class, Day03.class, Day04.class, Day05.class, Day06.class, Day08.class, Day09.class,
         Day11.class, Day12.class, Day15.class, Day18.class
     };
