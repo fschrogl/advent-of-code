@@ -92,7 +92,7 @@ public class Day02 extends AbstractSolution {
 
     @Override
     protected SolutionData exercise2() {
-        SolutionData data = SolutionData.from(Day02.class.getResource("input-exercise12.txt"), 1L);
+        SolutionData data = SolutionData.from(Day02.class.getResource("input-exercise12.txt"), 649L);
 
         List<PasswordChecker> validPasswords = data.getInput().asLines().stream()
             .map(PasswordChecker::new)
